@@ -1,0 +1,61 @@
+<html>
+<body>
+
+<script type="text/javascript">
+
+function println(str){
+    document.write(str);
+	document.write("<br />");
+}
+function print(str){
+	document.write(str);
+}
+function printArray(array){
+	print("print Array: ");
+	for(i=0;i<array.length;i++){
+		print(array[i] + " : ");
+	}
+	println("");
+}
+//index: current position
+function combination(array, index,  num, result){
+    if (num == 0){
+		for(j=0;j<result.length; j++){
+			print(result[j] + " , ");
+		}
+		println("");
+		return;
+	}
+	if(array.length == index) return;
+	result.push(array[index]);
+	combination(array, index+1, num-1, result);
+	result.pop();
+	combination(array, index+1, num, result);// take care,NOT increase the num, since result hasn't contain the num, or it will lose many number
+	
+}
+function printAllCombination(){
+	var value = document.getElementById('inputArray').value;
+	var array = value.split(',');
+    var result=[];
+	for(i = 1; i < array.length; i++){
+		println("combination num is: " + i);
+		combination(array, 0, i, result);
+	}
+}
+/*
+var input = ['1','2','3','4'];
+var length = input.length;
+println("length: " + length);
+for(i = 0; i< length; i++)
+{
+   println("input[i]: " + input[i]);
+
+}
+
+printAllCombination(input);*/
+</script>
+<input id="inputArray">  <<---- Input the array,separated by comma</input>
+<input  type="button" onclick="printAllCombination();" value="Calculate Combination">
+
+</body>
+</html>
